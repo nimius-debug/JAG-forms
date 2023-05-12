@@ -1,6 +1,8 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+title = "Paystub"
+subtitle = "Paystub"
 data = {
     "company_name": "John Doe Inc.",
     "address": "123 north street, New York, NY 10001",
@@ -33,7 +35,7 @@ def custom_Heading_subhead(c,x,y, key, value ):
     
 def create_pay_stub(pdf_name, data):
     c = canvas.Canvas(pdf_name, pagesize=letter)
-
+    c.setTitle(title)
     width, height = letter
     print(width, height)
     c.rect(20, 500, 572, 255, stroke=1, fill=0)
