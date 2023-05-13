@@ -1,30 +1,31 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+import streamlit as st
 
-title = "Paystub"
-subtitle = "Paystub"
-data = {
-    "company_name": "John Doe Inc.",
-    "address": "123 north street, New York, NY 10001",
-    "check_no": '106',
-    "employee_information":"Jane Doe",
-    "ssn":" ***-**-1234",
-    "reporting_period":"4/21/2023 - 5/5/2023",
-    "EmployeeID":'146',
-    "pay_date": "5/5/2023",
-    "rate": 25.00,
-    "hours": 200.00,
-    "ytd_gross": 6000.00,
-    "ytd_net": 6000.00,
-    "current_total_deductions": 0.0,
-    "gross_pay": 600.00,
-    "ytd_deductions": 0.0,
-    "net_pay": 600.00,
-    "federal_tax": 0.0,
-    "state_tax": 0.0,
-    "social_security_dectuctions": 0.0,
-    "other_deductions": 0.0,
-}
+
+
+# data = {
+#     "company_name": "John Doe Inc.",
+#     "address": "123 north street, New York, NY 10001",
+#     "check_no": '106',
+#     "employee_information":"Jane Doe",
+#     "ssn":" ***-**-1234",
+#     "reporting_period":"4/21/2023 - 5/5/2023",
+#     "EmployeeID":'146',
+#     "pay_date": "5/5/2023",
+#     "rate": 25.00,
+#     "hours": 200.00,
+#     "ytd_gross": 6000.00,
+#     "ytd_net": 6000.00,
+#     "current_total_deductions": 0.0,
+#     "gross_pay": 600.00,
+#     "ytd_deductions": 0.0,
+#     "net_pay": 600.00,
+#     "federal_tax": 0.0,
+#     "state_tax": 0.0,
+#     "social_security_dectuctions": 0.0,
+#     "other_deductions": 0.0,
+# }
 
 def custom_Heading_subhead(c,x,y, key, value ):
    
@@ -33,7 +34,7 @@ def custom_Heading_subhead(c,x,y, key, value ):
     c.setFont("Helvetica", 10)
     c.drawString(x, y-13, value)
     
-def create_pay_stub(pdf_name, data):
+def create_pay_stub(pdf_name,title, data):
     c = canvas.Canvas(pdf_name, pagesize=letter)
     c.setTitle(title)
     width, height = letter
@@ -110,4 +111,4 @@ def create_pay_stub(pdf_name, data):
 
     c.save()
 
-create_pay_stub("pay_stub.pdf", data)
+# create_pay_stub("pay_stub.pdf", data)
