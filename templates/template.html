@@ -1,0 +1,166 @@
+<html>
+    <head>
+        <title>{{ data.employee_name }} Paystub-{{ data.pay_date }} </title>
+        <style>
+            @media (min-width: 768px) {
+                .paystub {
+                    position: fixed;
+                    top: 120px; 
+                    width: 50%;
+                    padding: 10px; 
+                    border: 3px solid black;
+                    overflow: hidden;
+                    font-family: Helvetica, sans-serif;
+                    background-color: white;
+                    color: black;
+                }
+            }
+            @media (max-width: 767px) {
+                .paystub {
+                    padding: 10px; 
+                    border: 3px solid black;
+                    overflow: hidden;
+                    font-family: Helvetica, sans-serif;
+                    background-color: white;
+                    color: black;
+                }
+            }
+            .scrollable-table {
+                overflow-x: auto;
+                padding-top: 10px;
+            }
+            .column1 { width: 49.5%; float: left;}
+            .column2 { width: 49.5%; float: right;}
+            h3 {
+                text-align:right;
+                color : black;
+            }
+            table {
+                width: 100%; 
+                border-collapse: collapse; 
+            }
+            td, th {
+                padding: 10px;
+                text-align: left;  
+                border:none;
+            }
+            .header {
+                font-weight: bold; 
+                background-color: lightgray;
+            }
+            .container2 td, .container2 th { width: 50%; border:none;}
+            .container3 td:nth-child(1), .container3 th:nth-child(1) { width: 50%;  border:none;}
+            .container4 td, .container4 th  { width: 25%; border:none;}
+            .container6 td, .container6 th {border:none; }
+            .container6 td:nth-child(1), .container6 th:nth-child(1) { width: 35%; border:none;}
+            .container6 td:nth-child(2), .container6 th:nth-child(2) { width: 15%; }
+            .container6 td:nth-child(3), .container6 th:nth-child(3) { width: 15%; }
+            .container6 td:nth-child(4), .container6 th:nth-child(4) { width: 15%; }
+            .container6 td:nth-child(5), .container6 th:nth-child(5) { width: 10%; }
+            .container6 td:nth-child(6), .container6 th:nth-child(6) { width: 10%; }
+            .containerlast td, .containerlast th { width: 16.66%; border:none;}
+            .container3 tr:nth-child(odd) { background-color: #f2f2f2;}
+        </style>
+    </head>
+    <body>
+        <div class="paystub">
+            <div class="scrollable-table">
+                <table class="container2">
+                    <tr>
+                        <td>{{ data.company_name }}<br>{{ data.address }}</td>
+                        <td><h3>EARNING STATEMENT</h3></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="scrollable-table">
+                <table class="container6">
+                     <tr>
+                        <th class="header">Employee Info</th>
+                        <th class="header">SSN</th>
+                        <th class="header">Pay Period</th>
+                        <th class="header">Pay Date</th>
+                        <th class="header">Employee ID</th>
+                        <th class="header">Check No</th>
+                    </tr>
+                    <tr>
+                        <td>{{ data.employee_name }}<br> {{ data.employee_address }} <br> {{ data.employee_city }}, {{ data.employee_state }}, {{ data.employee_zipcode }}</td>
+                        <td>{{ data.ssn }}</td>
+                        <td>{{ data.pay_period }}</td>
+                        <td>{{ data.pay_date }}</td>
+                        <td>{{ data.EmployeeID }}</td>
+                        <td>{{ data.check_no }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="column1">
+                <div class="scrollable-table">
+                    <table class="container4">
+                        <tr>
+                            <th class="header">Earnings</th>
+                            <th class="header">Hours</th>
+                            <th class="header">Rate</th>
+                            <th class="header">Total</th>
+                        </tr>
+                        <tr>
+                            <td>{{data.earnings}}</td>
+                            <td>{{data.hours}}</td>
+                            <td>{{data.rate}}</td>
+                            <td>{{data.gross_pay}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column2">
+                <div class="scrollable-table">
+                    <table class="container3">
+                        <tr>
+                            <th class="header">Statutory Deductions</th>
+                            <th class="header">Total</th>
+                            <th class="header">YTD</th>
+                        </tr>
+                        <tr>
+                            <td>FICA-Medicare </td>
+                            <td>{{ data.fica_med }}</td>
+                            <td>{{ data.ytd_fica_med }}</td>
+                        </tr>
+                        <tr>
+                            <td>FICA-Social Security </td>
+                            <td>{{ data.fica_ss }}</td>
+                            <td>{{ data.ytd_fica_ss}}</td>
+                        </tr>
+                        <tr>
+                            <td>State Tax</td>
+                            <td>{{ data.state_tax }}</td>
+                            <td>{{ data.ytd_state_tax }}</td>
+                        </tr>
+                            <td>Federal Tax </td>
+                            <td>{{ data.federal_tax}}</td>
+                            <td>{{ data.ytd_federal_tax}}</td>
+                        </tr>
+                        {% if other_deduction_flag %}<tr><td>Other_deduction</td><td>{{ data.other_deductions }}</td><td>{{ data.ytd_other_deductions }}</td></tr>
+                        {% endif %}</table></div> 
+            </div>
+            <div style="clear:both;"></div>
+            <div style="margin-top:20px;" class="scrollable-table">
+                <table class="containerlast">
+                    <tr>
+                        <th class="header">YTD Gross</th>
+                        <th class="header">YTD Deductions</th>
+                        <th class="header">YTD Net Pay</th>
+                        <th class="header">Gross Pay</th>
+                        <th class="header">Deductions</th>
+                        <th class="header">NetPay</th>
+                    </tr>
+                    <tr>
+                        <td>{{ data.ytd_gross}}</td>
+                        <td>{{ data.ytd_deductions}}</td>
+                        <td>{{ data.ytd_net}}</td>
+                        <td>{{ data.gross_pay}}</td>
+                        <td>{{ data.current_total_deductions}}</td>
+                        <td>{{ data.net_pay}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
