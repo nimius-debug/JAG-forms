@@ -84,6 +84,18 @@ def input_paystub_info(pay_option, key = "0"):
         gross_pay = st.number_input('Gross Pay/Earnings', value=0.00, key=key + "_gross_pay_salary")
     return rate, hours, gross_pay
 
+def pro_input_paystub_info(pay_option, key = "0"):
+    st.header("Current Paystub Information")    
+    if pay_option == 'Hourly':
+        rate = st.number_input('Hourly Rate', value=0.00, key=key + "_hourly_rate")
+        hours = st.number_input('Hours Worked', value=0.00, key=key + "_hours_worked")
+        gross_pay = st.number_input('Gross Pay/Earnings', value=rate*hours, key=key + "_gross_pay_hourly")
+    else:   
+        rate = st.text_input('Hourly Rate', value="---", disabled=True, key=key + "_salary_rate")
+        hours = st.text_input('Hours Worked', value="---", key=key + "_hours_worked_salary")
+        gross_pay = st.number_input('Gross Pay/Earnings', value=0.00, key=key + "_gross_pay_salary")
+    return rate, hours, gross_pay
+
 def input_employee_info(key = "0"):
     st.header("Employee Information")
     employee_name = st.text_input('Employee Name',value=data['employee_name'] , key=key + "_employee_name")
@@ -259,7 +271,7 @@ def Paystub_Generator():
                             help="if salary is selected, the rate and hours worked will be disabled",
                             key="pro_pay_option"
                             )
-            rate, hours, gross_pay = input_paystub_info(pay_option,key="1")
+            rate, hours, gross_pay = pro_input_paystub_info(pay_option,key="1")
             date_range_str, pay_date_str = input_date_info(key="1")
             contractor = st.checkbox('Contractor' , key="pro_contractor",
                         help="contractors are responsible for paying their own taxes, \
@@ -274,7 +286,13 @@ def Paystub_Generator():
             net_pay = st.number_input('Net Pay', value=gross_pay-total_deductions)
             ytd_gross, ytd_deductions, ytd_net = input_earnings_info()
             ytd_federal_tax, ytd_state_tax,ytd_fica_med_ss ,ytd_social_security_dectuctions, ytd_other_deductions = input_ytd_deductions(contractor)
-            
+            with st.expander("Color Theme"):
+                theme = st.radio("Select a color theme", options=[st.color_picker("Build your theme",value="#D3D3D3"),"Default", "Modern"], key="color_theme",horizontal=True)
+                if theme == "Default":
+                    theme = "lightgray"
+                elif theme == "Modern":
+                    theme = "lightblue"
+                
             data.update({
                 "company_name": company_name,
                 "address": company_adr,
@@ -288,7 +306,7 @@ def Paystub_Generator():
                 "EmployeeID": EmployeeID,
                 "pay_date": pay_date_str,
                 "check_no": check_no,
-                "earnings": gross_pay,
+                "earnings": pay_option,
                 "rate": rate,
                 "hours": hours,
                 "gross_pay": gross_pay,
@@ -307,14 +325,14 @@ def Paystub_Generator():
                 "ytd_state_tax": ytd_state_tax,
                 "ytd_other_deductions": ytd_other_deductions,
                 "ytd_deductions": ytd_deductions,
+                "theme_color": theme,
             })
         with col2:
             html_template = render_template(data=data,other_deduction_flag=False)
-            st.markdown(html_template, unsafe_allow_html=True)
-
-                   
+            st.markdown(html_template, unsafe_allow_html=True)  
+        
         pdf_button = st.button(label='Generate Paystub' , help="Generate a PDF of the paystub")
-       
+
         if pdf_button:
             pro_pdf = generate_pdf(html_template)
             filename = f"{data['employee_name']}_{datetime.date.today().strftime('%m-%d-%Y')}_paystub.pdf"

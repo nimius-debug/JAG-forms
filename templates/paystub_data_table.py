@@ -30,4 +30,5 @@ data = {
     "ytd_state_tax": 500.0,
     "ytd_other_deductions": 500.0,
     "ytd_deductions": 150.0,
+    "theme_color": "lightgray"
 }
