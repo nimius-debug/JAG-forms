@@ -3,7 +3,7 @@
 providers = ["...","python"]
 
 [phases.setup]
-nixPkgs = ["...", "wkhtmltopdf", "libcairo", "pkg-config"]
+nixPkgs = ["...", "wkhtmltopdf", "cairo", "pkg-config"]
 
 [phases.install]
 cmds = [
