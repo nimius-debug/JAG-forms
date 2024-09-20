@@ -5,12 +5,20 @@
     "nixpacksPlan": {
       "phases": {
         "setup": {
-          "cmds": ["...", "sudo apt-get -y update && sudo apt-get install -y wkhtmltopdf"]
+          "nixPkgs": [],
+          "cmds": [
+            "...",
+            "wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb",
+            "sudo apt-get update",
+            "sudo apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb",
+            "sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin/wkhtmltopdf",
+            "rm wkhtmltox_0.12.6-1.buster_amd64.deb"
+          ]
         }
       }
     }
   },
   "deploy": {
-    "startCommand": "streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
+    "startCommand": "wkhtmltopdf --version && streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
   }
 }
