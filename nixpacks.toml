@@ -1,0 +1,2 @@
+[pkgs]
+apt = ["wkhtmltopdf", "libcairo2-dev", "pkg-config", "python3-dev"]

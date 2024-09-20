@@ -3,7 +3,6 @@ from reportlab.pdfgen import canvas
 from io import BytesIO
 
 def custom_Heading_subhead(c,x,y, key, value ):
-   
     c.setFont("Helvetica-Bold", 10)
     c.drawString(x, y, key)
     c.setFont("Helvetica", 10)
@@ -91,5 +90,43 @@ def create_pay_stub(pdf_name,title, data):
 
     c.save()
     pdf_data = buffer.getvalue()
+    buffer.close()
     return pdf_data
-# create_pay_stub("pay_stub.pdf", data)
+
+# data = {
+#     "company_name": "Tech Widget Pro LLC",
+#     "address": "456 South Avenue, Chicago, IL 60007",
+#     "employee_name": "Alejandro Garcia Sanchez",
+#     "employee_address": "789 East Boulevard",
+#     "employee_city": "Chicago",
+#     "employee_state": "IL",
+#     "employee_zipcode": "60007",
+#     "ssn": "***-**-5678",
+#     "pay_period": "5/7/2023 - 5/21/2023",
+#     "EmployeeID": '256',
+#     "pay_date": "5/22/2023",
+#     "check_no": '203',
+#     "earnings": 'Salary',
+#     "rate": 30.00,
+#     "hours": 180.00,
+#     "gross_pay": 800.00,
+#     "net_pay": 700.00,
+#     "ytd_gross": 7000.00,
+#     "ytd_net": 6500.00,
+#     "fica_med": 50.0,
+#     "fica_ss": 100.0,
+#     "federal_tax": 50.0,
+#     "state_tax": 50.0,
+#     "other_deductions": 50.0,
+#     "current_total_deductions": 100.0,
+#     "ytd_fica_med": 500.0,
+#     "ytd_fica_ss": 1000.0,
+#     "ytd_federal_tax": 500.0,
+#     "ytd_state_tax": 500.0,
+#     "ytd_other_deductions": 500.0,
+#     "ytd_deductions": 150.0,
+#     "theme_color": "lightgray"
+# }
+# pdf_bytes = create_pay_stub("pay_stub.pdf",'hello', data)
+# with open("pay_stub.pdf", "wb") as f:
+#     f.write(pdf_bytes)
