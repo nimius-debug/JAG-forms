@@ -1,2 +1,23 @@
 [pkgs]
-apt = ["wkhtmltopdf", "libcairo2-dev", "pkg-config", "python3-dev"]
+apt = [
+  "wkhtmltopdf",
+  "libcairo2-dev",
+  "pkg-config",
+  "python3-dev",
+  "build-essential"
+]
+
+[phases.setup]
+commands = [
+  "python3 -m venv /opt/venv"
+]
+
+[phases.install]
+commands = [
+  ". /opt/venv/bin/activate",
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[deploy]
+startCommand = "streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
