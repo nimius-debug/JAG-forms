@@ -1,0 +1,18 @@
+# nixpacks.toml
+
+[providers]
+providers = ["python"]
+
+[phases.setup]
+nixPkgs = ["...", "wkhtmltopdf", "libcairo", "pkg-config"]
+
+[phases.install]
+cmds = [
+  "python3 -m venv /opt/venv",
+  ". /opt/venv/bin/activate",
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[start]
+cmd = "streamlit run '🏠_Home.py' --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
