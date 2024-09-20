@@ -1,9 +1,9 @@
 # nixpacks.toml
 
-providers = ["...","python"]
+providers = ["python"]
 
 [phases.setup]
-nixPkgs = ["...", "wkhtmltopdf", "cairo", "pkg-config"]
+nixPkgs = ["wkhtmltopdf", "pkg-config"]
 
 [phases.install]
 cmds = [
