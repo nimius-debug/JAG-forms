@@ -3,8 +3,10 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacksPlan": {
-      "pkgs": {
-        "nixpkgs": ["wkhtmltopdf"]
+      "phases": {
+        "setup": {
+          "nixPkgs": ["wkhtmltopdf"]
+        }
       }
     }
   },
