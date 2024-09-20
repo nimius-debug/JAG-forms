@@ -1,9 +1,10 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "NIXPACKS",
+    "buildCommand": "apt-get update && apt-get install -y wkhtmltopdf "
   },
   "deploy": {
-    "startCommand": "streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
+    "startCommand": "wkhtmltopdf --version && streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
   }
 }
