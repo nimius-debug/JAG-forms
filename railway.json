@@ -3,15 +3,13 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacksPlan": {
-      "phases": {
-        "setup": {
-          "aptPkgs": ["wkhtmltopdf", "libcairo2-dev", "pkg-config"]
-        }
+      "pkgs": {
+        "nixpkgs": ["wkhtmltopdf", "libcairo", "pkg-config", "python3", "python3Packages.pip"]
       }
     }
   },
   "deploy": {
-    "startCommand": "streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal",
+    "startCommand": "wkhtmltopdf --version && streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
