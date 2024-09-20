@@ -21,19 +21,22 @@ st.set_page_config(
 
 def Home():
     with st.sidebar: 
-        logo = Image.open('img/JAGforms_white.png')
-        st.image(logo,use_column_width=True)
+        # Load and display the logo
+
+        # Set the logo in the top corner (if you want it there as well)
+        st.logo(image="img/logo_side.png",icon_image="img/logo_main.png")  # This sets the logo for the app header
+
         st.header("Instructions")
-        st.write("Please fill out the form to generate a the PDF.")
+        st.write("Please fill out the form to generate the PDF.")
+
         feat = ["Interactive Form", "PDF Generation", "Sidebar Instructions"]
         st.header("Features")
         st.markdown('\n'.join(f'- {item}' for item in feat))
         
         
         button(username="jagcoffee", floating=False, width=221)
-        
-    logo = Image.open('img/JAGforms_white.png')
-    st.image(logo,width=300)
+    
+     # This sets the logo for the app header   
     st.title('Jag Forms: Your Paperwork, Simplified!')
 
     st.markdown("""

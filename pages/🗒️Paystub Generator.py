@@ -36,8 +36,7 @@ def disable():
 #*******************************************************************************
 #Sidebar
 with st.sidebar:
-    logo = Image.open('img/JAGforms_white.png')
-    st.image(logo,use_column_width=True)
+    st.logo(image="img/logo_side.png",icon_image="img/logo_main.png")  # This sets the logo for the app header
     st.header("Instructions")
     st.write("Please fill out the form below to generate a paystub.")
     st.title('PDF Paystub Generator ')
