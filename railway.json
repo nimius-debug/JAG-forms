@@ -5,8 +5,8 @@
     "nixpacksPlan": {
       "phases": {
         "setup": {
-          "nixPkgs": [],
-          "cmds": ["sudo apt-get -y update && sudo apt-get install -y wkhtmltopdf"]
+          "nixPkgs": ["python3", "wkhtmltopdf", "libcairo", "pkg-config", "python3-dev"],
+          "cmds": []
         }
       }
     }
