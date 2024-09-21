@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.up.railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "setup": {
+          "nixPkgs": [],
+          "cmds": ["sudo apt-get -y update && sudo apt-get install -y wkhtmltopdf"]
+        }
+      }
+    }
+  },
+  "deploy": {
+    "startCommand": "wkhtmltopdf --version && streamlit run 🏠_Home.py --server.address 0.0.0.0 --server.port $PORT --server.fileWatcherType none --browser.gatherUsageStats false --client.toolbarMode minimal"
+  }
+}
