@@ -5,7 +5,7 @@
     "nixpacksPlan": {
       "phases": {
         "setup": {
-          "nixPkgs": ["python3", "wkhtmltopdf", "libcairo", "pkg-config", "python3-dev"],
+          "nixPkgs": ["python3", "wkhtmltopdf", "pkg-config", "python3-dev"],
           "cmds": []
         }
       }
